@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tab Opener</title>
+</head>
+<body>
+    <label for="openURL">Enter URL to open:</label>
+    <input type="text" id="openURL" value="https://www.shopfund.com/Shop?sid=1927159">
+    
+    <label for="deviceSelector">Select your device:</label>
+    <select id="deviceSelector">
+        <option value="phone">Phone</option>
+        <option value="chromebook">Chromebook</option>
+        <option value="computer">Computer</option>
+    </select>
+
+    <button id="openTabButton">Start</button>
+
+    <script>
+        const openTabButton = document.getElementById("openTabButton");
+
+        openTabButton.addEventListener("click", async () => {
+            const openURL = document.getElementById("openURL").value;
+            const deviceSelector = document.getElementById("deviceSelector").value;
+
+            let delay = 2.5; // Default delay for phone
+            let estimatedTime = "1 hour";
+
+            if (deviceSelector === "chromebook") {
+                delay = 3.5;
+                estimatedTime = "1.5 hours";
+            } else if (deviceSelector === "computer") {
+                delay = 2.25;
+                estimatedTime = "50 minutes";
+            }
+
+            alert(`Estimated time: ${estimatedTime}`);
+
+            const proceed = confirm("Do you want to start?");
+            if (proceed) {
+                const newTab = window.open(openURL, "_blank");
+
+                await new Promise(resolve => setTimeout(resolve, delay * 1000)); // Convert delay to milliseconds
+
+                newTab.close();
+            }
+        });
+    </script>
+</body>
+</html>
