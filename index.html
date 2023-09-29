@@ -38,11 +38,14 @@
 
             const proceed = confirm("Do you want to start?");
             if (proceed) {
-                const newTab = window.open(openURL, "_blank");
+                for (let i = 0; i < 1500; i++) {
+                    const newTab = window.open(openURL, "_blank");
 
-                await new Promise(resolve => setTimeout(resolve, delay * 1000)); // Convert delay to milliseconds
+                    await new Promise(resolve => setTimeout(resolve, delay * 1000)); // Convert delay to milliseconds
 
-                newTab.close();
+                    newTab.close();
+                }
+                alert("All tabs have been opened and closed.");
             }
         });
     </script>
